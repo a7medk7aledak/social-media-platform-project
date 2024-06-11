@@ -4,10 +4,11 @@ axios
   .then(function (response) {
     // handle success
     let posts = response.data.data;
+    document.getElementById("posts").innerHTML = ""; // to make posts empty
     for (const post of posts) {
-        console.log(post);
-        document.getElementById("posts").innerHTML = "";  // to make posts empty 
-        let content = `<div class="card shadow ">
+      console.log(post);
+
+      let content = `<div class="card shadow ">
                         <div class="card-header">
                             <img class="rounded-circle border border-2" src="./profile-pics/profilepic.webp" alt=""
                                 style="width: 40px; height: 40px;">
@@ -30,9 +31,8 @@ axios
                         </div>
                     </div>
         `;
-        document.getElementById("posts").innerHTML += content; //+= to update data in loop 
+      document.getElementById("posts").innerHTML += content; //+= to update data in loop
     }
-    
   })
   .catch(function (error) {
     // handle error
