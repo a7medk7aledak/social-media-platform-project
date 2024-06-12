@@ -1,3 +1,5 @@
+const { headers } = require("next/headers");
+
 setupUI();
 
 //get posts
@@ -160,7 +162,7 @@ function setupUI() {
     document.getElementById("nav-username").innerHTML=user.username
   }
 }
-// get cuurent user
+// get current user
 function getCrrentUser(){
   let user = null
   let storageUser = localStorage.getItem("user")
@@ -180,5 +182,23 @@ function logout() {
 
 // create new post
 function createNewPostClicked() {
-  console.log("lkakfakfkdmfsm");
+    const title = document.getElementById("post-title-input").value;
+    const body = document.getElementById("post-body-input").value;
+    const params = {
+      "body": body,
+      "title": title,
+    };
+    const token = localStorage.getItem("token");
+    const headers = {
+        "authorization": `Bearer${token}`
+    }
+    axios
+      .post(`https://tarmeezacademy.com/api/v1/posts`, params,{headers : headers})
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((error) => {
+        const message = error.response.data.message;
+        showAlert(message, "danger");
+      });
 }
