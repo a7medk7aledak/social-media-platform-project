@@ -185,17 +185,19 @@ function createNewPostClicked() {
     const title = document.getElementById("post-title-input").value;
     const body = document.getElementById("post-body-input").value;
     const image = document.getElementById("post-image-input").files[0]; //get first image using file(s)
-    //to send form data not json
-    let formDate = new FormDate();
-    formDate.append("body",body)
-    formDate.append("title", title);
-    formDate.append("image", image);
     const token = localStorage.getItem("token");
+    //to send form data not json
+    let formData = new FormData();
+    formData.append("body",body)
+    formData.append("title", title);
+    formData.append("image", image);
+
     const headers = {
-        "authorization": `Bearer${token}`
+      "Content-Type" : "multipart/from-data",
+        "authorization": `Bearer ${token}`
     }
     axios
-      .post(`https://tarmeezacademy.com/api/v1/posts`, formDate, {
+      .post(`https://tarmeezacademy.com/api/v1/posts`, formData, {
         headers: headers,
       })
       .then((response) => {
