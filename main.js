@@ -1,6 +1,6 @@
-
+//get posts
 axios
-  .get("https://tarmeezacademy.com/api/v1/posts")
+  .get("https://tarmeezacademy.com/api/v1/posts") // get take url
   .then(function (response) {
     // handle success
     let posts = response.data.data;
@@ -42,3 +42,22 @@ axios
     // handle error
     console.log(error);
   });
+
+
+
+// post take url and body
+
+// login 
+function loginBtnClicked()
+{
+const username = document.getElementById("Username-input").value;
+const password = document.getElementById("Password-input").value
+const params ={
+    "username": username,
+  "password": password
+}
+  axios.post(`https://tarmeezacademy.com/api/v1/login`, params)
+  .then((response) => {
+  console.log(response.data)
+  })
+}
