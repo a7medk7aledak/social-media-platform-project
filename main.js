@@ -115,7 +115,7 @@ function registerBtnClicked() {
     });
 }
 
-// function to show successs alert
+// function to show success alert
 function showAlert(customeMessage, type) {
   const alertPlaceholder = document.getElementById("liveAlertPlaceholder");
   const alert = (message, type) => {
