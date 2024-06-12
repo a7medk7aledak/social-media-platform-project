@@ -113,11 +113,14 @@ function setupUI() {
   const token = localStorage.getItem("token");
   const logedindDiv = document.getElementById("logedin-div");
   const logoutDiv = document.getElementById("logout-div");
-
+  // add button in  create post ...By Ahmed_ak
+  const addBtn = document.getElementById("add-btn") 
   if (token == null) {
+    addBtn.style.setProperty("display", "none", "important"); // ahmed_ak
     logedindDiv.style.setProperty("display", "flex", "important");
     logoutDiv.style.setProperty("display", "none", "important");
   } else {
+    addBtn.style.setProperty("display", "block", "important"); // ahmed_ak
     logedindDiv.style.setProperty("display", "none", "important");
     logoutDiv.style.setProperty("display", "flex", "important");
   }
