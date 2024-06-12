@@ -184,18 +184,22 @@ function logout() {
 function createNewPostClicked() {
     const title = document.getElementById("post-title-input").value;
     const body = document.getElementById("post-body-input").value;
-    const params = {
-      "body": body,
-      "title": title,
-    };
+    const image = document.getElementById("post-image-input").files[0]; //get first image using file(s)
+    //to send form data not json
+    let formDate = new FormDate();
+    formDate.append("body",body)
+    formDate.append("title", title);
+    formDate.append("image", image);
     const token = localStorage.getItem("token");
     const headers = {
         "authorization": `Bearer${token}`
     }
     axios
-      .post(`https://tarmeezacademy.com/api/v1/posts`, params,{headers : headers})
+      .post(`https://tarmeezacademy.com/api/v1/posts`, formDate, {
+        headers: headers,
+      })
       .then((response) => {
-        console.log(response)
+        console.log(response);
       })
       .catch((error) => {
         const message = error.response.data.message;
