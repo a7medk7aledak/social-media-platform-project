@@ -1,4 +1,4 @@
-const { headers } = require("next/headers");
+// const { headers } = require("next/headers");
 
 setupUI();
 
