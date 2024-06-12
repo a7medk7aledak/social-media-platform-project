@@ -164,7 +164,7 @@ function logout() {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
   setupUI();
-  showAlert("log out successfully", "success");
+  showAlert("logged out successfully", "success");
 }
 
 // create new post
