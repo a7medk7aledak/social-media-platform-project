@@ -156,7 +156,18 @@ function setupUI() {
     addBtn.style.setProperty("display", "block", "important"); // ahmed_ak
     logedindDiv.style.setProperty("display", "none", "important");
     logoutDiv.style.setProperty("display", "flex", "important");
+    const user = getCrrentUser()
+    document.getElementById("nav-username").innerHTML=user.username
   }
+}
+// get cuurent user
+function getCrrentUser(){
+  let user = null
+  let storageUser = localStorage.getItem("user")
+  if(storageUser != null){
+    user = JSON.parse(storageUser)
+  }
+  return user
 }
 
 // logout function
