@@ -1,24 +1,38 @@
-// infinite scroll
+let currentPage = 1;
+let lastPage = 1;
 
+// infinite scroll
+// belal is here
 window.addEventListener("scroll", function () {
   const endOfPage =
     window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+  if (endOfPage && currentPage < lastPage) {
+    currentPage = currentPage + 1;
+    getPosts(false, currentPage);
+  }
 });
-// infinite scroll
+// end infinite scroll
 
 setupUI();
-
+getPosts();
 //get posts
-axios
-  .get("https://tarmeezacademy.com/api/v1/posts") // get take url
-  .then(function (response) {
-    // handle success
-    let posts = response.data.data;
-    document.getElementById("posts").innerHTML = ""; // to make posts empty
-    for (const post of posts) {
-      console.log(post);
+function getPosts(reload = true, page = 1) {
+  // belal is here
 
-      let content = `<div class="card shadow ">
+  axios
+    .get(`https://tarmeezacademy.com/api/v1/posts?limit=2&page=${page}`) // get take url
+    .then(function (response) {
+      // handle success
+      let posts = response.data.data;
+      lastPage = response.data.meta.last_page; // belal is here
+      if (reload) {
+        // belal is here
+        document.getElementById("posts").innerHTML = ""; // to make posts empty
+      }
+      for (const post of posts) {
+        console.log(post);
+
+        let content = `<div class="card shadow ">
                         <div class="card-header">
                             <img class="rounded-circle border border-2" src="${
                               post.author.profile_image
@@ -49,21 +63,21 @@ axios
                         </div>
                     </div>
         `;
-      document.getElementById("posts").innerHTML += content; //+= to update data in loop
-      let currentPostTagsId = `post-tags-${post.id}`;
-      document.getElementById(currentPostTagsId).innerHTML = "";
-      for (const tag of post.tags) {
-        let tagsContent = ` <button class= "btn btn-sm rounded-5" style="background-color: gray;color:#ffff">${tag.name}</button>
+        document.getElementById("posts").innerHTML += content; //+= to update data in loop
+        let currentPostTagsId = `post-tags-${post.id}`;
+        document.getElementById(currentPostTagsId).innerHTML = "";
+        for (const tag of post.tags) {
+          let tagsContent = ` <button class= "btn btn-sm rounded-5" style="background-color: gray;color:#ffff">${tag.name}</button>
         `;
-        document.getElementById(currentPostTagsId).innerHTML += tagsContent;
+          document.getElementById(currentPostTagsId).innerHTML += tagsContent;
+        }
       }
-    }
-  })
-  .catch(function (error) {
-    axios;
-    console.log(error);
-  });
-
+    })
+    .catch(function (error) {
+      axios;
+      console.log(error);
+    });
+}
 // post take url and body
 
 // login
@@ -87,9 +101,8 @@ function loginBtnClicked() {
       setupUI();
       showAlert("logged in successfully", "success");
     })
-    .catch((error) => {
-      const message = error.response.data.message;
-      showAlert(message, "danger");
+    .catch(() => {
+      showAlert("username or password is incorrect", "danger");
     });
 }
 
