@@ -130,3 +130,8 @@ function logout() {
   setupUI();
   showSuccessAlert("logged out successfully");
 }
+
+// create new post
+function createNewPostClicked() {
+  console.log("lkakfakfkdmfsm")
+}

@@ -17,7 +17,7 @@
 <body>
 
     <!-- start modals -->
-    <!-- login -->
+    <!-- start login -->
     <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -44,11 +44,41 @@
             </div>
         </div>
     </div>
-    <!-- login -->
+    <!-- end login -->
+
+
+        <!-- start create -->
+    <div class="modal fade" id="create-post-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create A NEw Post</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Title</label>
+                            <input type="text" class="form-control" id="Username-input">
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label">Password:</label>
+                            <input type="password" class="form-control" id="Password-input">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="createNewPostClicked()">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end create -->
     <!-- end modals -->
 
 <!-- start Add post Button -->
-    <div class="bg-primary" id="add-btn">+</div>
+    <div class="bg-primary" id="add-btn" data-bs-toggle="modal" data-bs-target="#create-post-modal">+</div>
 <!-- start Add post Button -->
 
 
@@ -61,7 +91,7 @@
 
 
     <!-- start navbar -->
-    <div class="pt-1 container" ">
+    <div class="pt-1 container">
           <div class=" d-flex justify-content-center">
         <div class="col-9">
             <nav class="pt-3 shadow rounded navbar navbar-expand-lg bg-body-tertiary">
@@ -83,7 +113,7 @@
 
                         <div id="logedin-div" class="d-flex justify-content-end w-100">
 
-                            <!-- for non loged in user -->
+                            <!-- for non login in user -->
                             <button id="login-btn" data-bs-toggle="modal" data-bs-target="#login-modal" type="button"
                                 class="mx-2 btn btn-outline-success">
                                 Login
@@ -92,7 +122,7 @@
                                 Register
                             </button>
                         </div>
-                        <!-- for loged in user -->
+                        <!-- for login in user -->
 
                         <div id="logout-div" class="d-flex justify-content-end w-100">
                             <button onclick="logout()" id="logout-btn" data-bs-toggle="modal" type="button"
