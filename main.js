@@ -1,3 +1,11 @@
+// infinite scroll
+
+window.addEventListener("scroll", function () {
+  const endOfPage =
+    window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+});
+// infinite scroll
+
 setupUI();
 
 //get posts
@@ -32,7 +40,6 @@ axios
                                     <path
                                         d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325" />
                                 </svg>
-                                <span>(${post.comments_count}) comments</span>
                                 <span>(${post.comments_count}) comments
                                   <span id="post-tags-${post.id}">
                                     <button class= "btn btn-sm rounded-5" style="background-color: gray;color:#ffff">policy</button>
@@ -91,14 +98,25 @@ function registerBtnClicked() {
   const name = document.getElementById("register-name-input").value;
   const username = document.getElementById("register-username-input").value;
   const password = document.getElementById("register-Password-input").value;
-  const params = {
-    username: username,
-    password: password,
-    name: name,
+  const image = document.getElementById("register-image-input").files[0];
+
+  let formData = new FormData();
+
+  formData.append("name", name);
+  formData.append("username", username);
+  formData.append("password", password);
+  formData.append("image", image);
+
+  const headers = {
+    "content-type": "multipart/form-data",
   };
+
   axios
-    .post(`https://tarmeezacademy.com/api/v1/register`, params)
+    .post(`https://tarmeezacademy.com/api/v1/register`, formData, {
+      headers: headers,
+    })
     .then((response) => {
+      console.log(response.data);
       // save token in local storage
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -156,18 +174,19 @@ function setupUI() {
     addBtn.style.setProperty("display", "block", "important"); // ahmed_ak
     logedindDiv.style.setProperty("display", "none", "important");
     logoutDiv.style.setProperty("display", "flex", "important");
-    const user = getCrrentUser()
-    document.getElementById("nav-username").innerHTML=user.username
+    const user = getCrrentUser();
+    document.getElementById("nav-username").innerHTML = user.username;
+    document.getElementById("nav-image").src = user.profile_image;
   }
 }
 // get cuurent user
-function getCrrentUser(){
-  let user = null
-  let storageUser = localStorage.getItem("user")
-  if(storageUser != null){
-    user = JSON.parse(storageUser)
+function getCrrentUser() {
+  let user = null;
+  let storageUser = localStorage.getItem("user");
+  if (storageUser != null) {
+    user = JSON.parse(storageUser);
   }
-  return user
+  return user;
 }
 
 // logout function
@@ -180,5 +199,33 @@ function logout() {
 
 // create new post
 function createNewPostClicked() {
-  console.log("lkakfakfkdmfsm");
+  const title = document.getElementById("post-title-input").value;
+  const body = document.getElementById("post-body-input").value;
+  const image = document.getElementById("post-image-input").files[0]; //get first image using file(s)
+  const token = localStorage.getItem("token");
+  //to send form data not json
+  let formData = new FormData();
+  formData.append("body", body);
+  formData.append("title", title);
+  formData.append("image", image);
+
+  const headers = {
+    "Content-Type": "multipart/from-data",
+    authorization: `Bearer ${token}`,
+  };
+  axios
+    .post(`https://tarmeezacademy.com/api/v1/posts`, formData, {
+      headers: headers,
+    })
+    .then((response) => {
+      const modal = document.getElementById("create-post-modal");
+      const modalinstance = bootstrap.Modal.getInstance(modal);
+      modalinstance.hide();
+      showAlert("New Post Has Been Created", "success");
+      getPosts();
+    })
+    .catch((error) => {
+      const message = error.response.data.message;
+      showAlert(message, "danger");
+    });
 }
