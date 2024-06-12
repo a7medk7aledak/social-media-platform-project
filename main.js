@@ -78,12 +78,45 @@ function loginBtnClicked() {
       const modalinstance = bootstrap.Modal.getInstance(modal);
       modalinstance.hide();
       setupUI();
-      showSuccessAlert("logged in successfully");
+      showAlert("logged in successfully", "success");
+    })
+    .catch((error) => {
+      const message = error.response.data.message;
+      showAlert(message, "danger");
+    });
+}
+
+// register
+function registerBtnClicked() {
+  const name = document.getElementById("register-name-input").value;
+  const username = document.getElementById("register-username-input").value;
+  const password = document.getElementById("register-Password-input").value;
+  const params = {
+    username: username,
+    password: password,
+    name: name,
+  };
+  axios
+    .post(`https://tarmeezacademy.com/api/v1/register`, params)
+    .then((response) => {
+      // save token in local storage
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+
+      const modal = document.getElementById("register-modal");
+      const modalinstance = bootstrap.Modal.getInstance(modal);
+      modalinstance.hide();
+      setupUI();
+      showAlert("New User registerd Successfully", "success");
+    })
+    .catch((error) => {
+      const message = error.response.data.message;
+      showAlert(message, "danger");
     });
 }
 
 // function to show successs alert
-function showSuccessAlert(customeMessage) {
+function showAlert(customeMessage, type) {
   const alertPlaceholder = document.getElementById("liveAlertPlaceholder");
   const alert = (message, type) => {
     const wrapper = document.createElement("div");
@@ -97,14 +130,14 @@ function showSuccessAlert(customeMessage) {
     alertPlaceholder.append(wrapper);
   };
 
-  alert(customeMessage, "success");
+  alert(customeMessage, type);
 
-  setTimeout(() => {
-    const alertToHide = bootstrap.Alert.getOrCreateInstance(
-      "#liveAlertPlaceholder"
-    );
-    alertToHide.close();
-  }, 3000);
+  // setTimeout(() => {
+  //   const alertToHide = bootstrap.Alert.getOrCreateInstance(
+  //     "#liveAlertPlaceholder"
+  //   );
+  //   alertToHide.close();
+  // }, 3000);
 }
 // end success alert
 
@@ -114,7 +147,7 @@ function setupUI() {
   const logedindDiv = document.getElementById("logedin-div");
   const logoutDiv = document.getElementById("logout-div");
   // add button in  create post ...By Ahmed_ak
-  const addBtn = document.getElementById("add-btn") 
+  const addBtn = document.getElementById("add-btn");
   if (token == null) {
     addBtn.style.setProperty("display", "none", "important"); // ahmed_ak
     logedindDiv.style.setProperty("display", "flex", "important");
@@ -131,10 +164,10 @@ function logout() {
   localStorage.removeItem("token");
   localStorage.removeItem("user");
   setupUI();
-  showSuccessAlert("logged out successfully");
+  showAlert("log out successfully", "success");
 }
 
 // create new post
 function createNewPostClicked() {
-  console.log("lkakfakfkdmfsm")
+  console.log("lkakfakfkdmfsm");
 }
