@@ -5,3 +5,18 @@ body {
 .card {
     margin-top: 30px;
 }
+
+#add-btn {
+    position: fixed;
+    bottom: 5%;
+    right: 7%;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    font-size: 50px;
+    color: #ffff;
+    text-align: center;
+    line-height: 1.2;
+    cursor: pointer;
+    box-shadow: 0 10px 10px rgb(0, 0, 0, 0.3);
+}
