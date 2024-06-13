@@ -192,8 +192,8 @@
         <!-- user's post -->
         <div class="d-flex justify-content-center row mt-5">
             <div class="col-9">
-                <h1>
-                    <span>ahmed</span>
+                <h1 style="color: #ffff;">
+                    <span>ahmed's</span>
                     post
                 </h1>
             </div>
@@ -234,7 +234,26 @@
         </div>
     </div>
     <!-- end main content -->
-    <script src="logicPostDetails.js"></script>
-</body>
 
+</body>
+    <script src="logicPostDetails.js"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search) //to get params id
+        const id = urlParams.get("postId")
+        setupUI();
+        getPost()
+        function getPost(id) {
+        axios
+            .get(`https://tarmeezacademy.com/api/v1/posts/${id}`) // get take url id
+            .then(function (response) {
+            // handle success
+            let post = response.data.data;
+            console.log(response.data)
+            })
+            .catch(function (error) {
+            console.log(error);
+            });
+        }
+
+    </script>
 </html>

@@ -37,15 +37,17 @@ function getPosts(reload = true, page = 1) {
 
         let content = `<div class="card shadow ">
                         <div class="card-header">
-                            <img class="rounded-circle border border-2" src="${post.author.profile_image
-          }" alt=""
+                            <img class="rounded-circle border border-2" src="${
+                              post.author.profile_image
+                            }" alt=""
                                 style="width: 40px; height: 40px;">
                             <b>${post.author.name}</b>
                         </div>
-                        <div class="card-body" >
+                        <div class="card-body" onclick = "postClick(${post.id})" style = "cursor: pointer">
                             <img class="w-100" src="${post.image}" alt="">
-                            <h6 class="mt-2" style="color: rgb(163, 159, 159);">${post.created_at
-          }</h6>
+                            <h6 class="mt-2" style="color: rgb(163, 159, 159);">${
+                              post.created_at
+                            }</h6>
                             <h5>${post.title === null ? "" : post.title}</h5> 
                             <p>${post.body}</p>
                             <hr>
@@ -250,6 +252,6 @@ function createNewPostClicked() {
 }
 
 //post click by ahmed_ak
-function postClick() {
-  console.log()
+function postClick(postId) {
+    window.location = `postDetails.html?postIs=${postId}`
 }
