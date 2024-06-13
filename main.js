@@ -263,7 +263,7 @@ function createNewPostClicked() {
     })
     .finally(() => {
       toggleLoader(0);
-    });;
+    });
 }
 
 //post click by ahmed_ak
