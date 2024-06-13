@@ -228,7 +228,46 @@
                             </div>
                         </div>
                     </div>
+                <!-- start comments -->
+                <div class="comments">
+                        <!-- start comment -->
+                        <div class="p-3" style="background-color:#edeeef">
+                            <div>
+                                <img src="#" alt="profile" class="rounded-circle" style="width: 40px; height: 40px;">
+                                <b>username</b>
+                            </div>
+                            <div>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias nesciunt animi veritatis, qui necessitatibus magnam facere voluptate inventore minima nam atque odit, recusandae repudiandae debitis alias. Corporis quo ut iste.
+                            </div>
+                        </div>
+                    <!-- end comment -->
+                        <!-- start comment -->
+                        <div class="p-3" style="background-color:#edeeef">
+                            <div>
+                                <img src="#" alt="profile" class="rounded-circle" style="width: 40px; height: 40px;">
+                                <b>username</b>
+                            </div>
+                            <div>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias nesciunt animi veritatis, qui necessitatibus magnam facere voluptate inventore minima nam atque odit, recusandae repudiandae debitis alias. Corporis quo ut iste.
+                            </div>
+                        </div>
+                    <!-- end comment -->
+                        <!-- start comment -->
+                        <div class="p-3" style="background-color:#edeeef">
+                            <div>
+                                <img src="#" alt="profile" class="rounded-circle" style="width: 40px; height: 40px;">
+                                <b>username</b>
+                            </div>
+                            <div>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias nesciunt animi veritatis, qui necessitatibus magnam facere voluptate inventore minima nam atque odit, recusandae repudiandae debitis alias. Corporis quo ut iste.
+                            </div>
+                        </div>
+                    <!-- end comment -->
                 </div>
+                
+                <!-- end comments -->
+            </div>
+                
             </div>
             <!-- end post -->
         </div>
@@ -251,6 +290,22 @@
                 let comments = post.comments;
                 let author = post.author;
                 document.getElementById("username-span").innerHTML = author.name;  ///get name
+                let commentsContent = ``
+                for (const comment of comments) {
+                    commentsContent += `
+                    <!-- start comment -->
+                        <div class="p-3" style="background-color: #edeeef">
+                            <div>
+                                <img src="${comment.author.profile_image}" alt="profile" class="rounded-circle" style="width: 40px; height: 40px;">
+                                <b>${comment.author.username}</b>
+                            </div>
+                            <div>
+                                ${comment.body}
+                            </div>
+                        </div>
+                    <!-- end comment -->
+                    `
+                }
                 const postContent = `
                         <div class="card shadow ">
                             <div class="card-header">
@@ -275,6 +330,9 @@
                                             <button class= "btn btn-sm rounded-5" style="background-color: gray;color:#ffff">policy</button>
                                         </span>
                                     </span>
+                                </div>
+                                <div id= "comments">
+                                    ${commentsContent}
                                 </div>
                             </div>
                         </div>
