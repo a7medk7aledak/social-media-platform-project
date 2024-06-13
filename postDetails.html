@@ -152,10 +152,10 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">profile</a>
+                                    <a class="nav-link" href="profile.html">profile</a>
                                 </li>
                             </ul>
 
@@ -181,7 +181,9 @@
                                     class="mx-2 btn btn-outline-danger">
                                     Logout
                                 </button>
-
+                                <button class="toggle-button" id="darkModeToggle" onclick="toggleDarkMode()">
+                                    <img id="toggleIcon" src="image/light.png" alt="Light Mode">
+                                </button>
                             </div>
 
                         </div>
@@ -286,6 +288,7 @@
     setupUI();
     getPost(id)
     function getPost(id) {
+        toggleLoader(1);
         axios
             .get(`https://tarmeezacademy.com/api/v1/posts/${id}`) // get take url id
             .then(function (response) {
@@ -349,7 +352,9 @@
             })
             .catch(function (error) {
                 console.log(error);
-            });
+            }).finally(() => {
+                toggleLoader(0);
+    });;
     }
     function createCommentClicked(){
         let commentBody = document.getElementById("comment-input").value
@@ -368,7 +373,9 @@
     }).catch((error)=>{
         const errorMessage = error.response.data.message;
         showAlert("the comment is empty!!!","danger")
-    })
+    }).finally(() => {
+      toggleLoader(0);
+    });
 }
 </script>
 

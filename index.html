@@ -181,11 +181,13 @@
 
                             <div id="logedin-div" class="d-flex justify-content-end w-100">
                                 <button id="login-btn" data-bs-toggle="modal" data-bs-target="#login-modal"
-                                    type="button" class="mx-2 btn btn-outline-success">
+                                    style="transition: background-color 0.3s;" type="button"
+                                    class="mx-2 btn btn-outline-success">
                                     Login
                                 </button>
                                 <button id="register-btn" data-bs-toggle="modal" data-bs-target="#register-modal"
-                                    type="button" class="btn btn-outline-success">
+                                    style="transition: background-color 0.3s;" type="button"
+                                    class="btn btn-outline-success">
                                     Register
                                 </button>
                             </div>
@@ -199,7 +201,9 @@
                                     class="mx-2 btn btn-outline-danger">
                                     Logout
                                 </button>
-
+                                <button class="toggle-button" id="darkModeToggle" onclick="toggleDarkMode()">
+                                    <img id="toggleIcon" src="image/light.png" alt="Light Mode">
+                                </button>
                             </div>
 
                         </div>

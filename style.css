@@ -1,5 +1,32 @@
 body {
-  background: #5f34fb;
+  background-color: #ffffff;
+  transition: background-color 0.5s, color 0.5s;
+}
+.plase {
+  background-color: #9461fb;
+  transition: background-color 0.3s;
+}
+
+.dark-mode {
+  background-color: #1e1e1e;
+}
+
+.toggle-button {
+  right: 10px;
+  padding: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border: rgb(255, 205, 112) 1px solid;
+  border-radius: 50%;
+  margin: 0 10px;
+}
+.toggle-button img {
+  width: 27px;
+}
+
+.plase:hover {
+  background-color: #712cf9;
 }
 
 .card {
@@ -150,7 +177,7 @@ body {
 }
 
 .loader-parent {
-  background-color: rgb(128, 128, 128,0.495);
+  background-color: rgb(128, 128, 128, 0.495);
   border-radius: 25px;
   display: flex;
   justify-content: center;
@@ -158,8 +185,8 @@ body {
   position: fixed;
   z-index: 99999;
   width: 90px;
-  height: 90PX;
+  height: 90px;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }

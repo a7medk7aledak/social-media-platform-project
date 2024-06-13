@@ -16,10 +16,19 @@
 
 <body>
     <!-- start loader -->
-    <div id="loader" class="loader-parent" >
-        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <div id="loader" class="loader-parent">
+        <div class="lds-roller">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-<!-- end loader -->
+    <!-- end loader -->
     <!-- start login modal -->
     <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -155,6 +164,9 @@
                                     class="mx-2 btn btn-outline-danger">
                                     Logout
                                 </button>
+                                <button class="toggle-button" id="darkModeToggle" onclick="toggleDarkMode()">
+                                    <img id="toggleIcon" src="image/light.png" alt="Light Mode">
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -175,7 +187,7 @@
                             <!-- srat profile pic -->
                             <div class="col-2">
                                 <img id="main-info-image" src="./profile-pics/profilepic.webp" alt=""
-                                    style="width:120px ;height:120px ; border-radius: 200px;!important" />
+                                    style="width:120px ;height:120px ; border-radius: 200px;" />
                                 <!-- end profile pic -->
                             </div>
                             <!-- username - email - name -->
