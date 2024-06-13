@@ -1,22 +1,39 @@
 body {
-    background: #4f2dc9;
+  background: #f0ecff;
 }
 
 .card {
-    margin-top: 30px;
+  margin-top: 30px;
 }
 
 #add-btn {
-    position: fixed;
-    bottom: 5%;
-    right: 7%;
-    width: 70px;
-    height: 70px;
-    border-radius: 50%;
-    font-size: 50px;
-    color: #ffff;
-    text-align: center;
-    line-height: 1.2;
-    cursor: pointer;
-    box-shadow: 0 10px 10px rgb(0, 0, 0, 0.3);
+  position: fixed;
+  bottom: 5%;
+  right: 7%;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  font-size: 50px;
+  color: #ffff;
+  text-align: center;
+  line-height: 1.2;
+  cursor: pointer;
+  box-shadow: 0 10px 10px rgb(0, 0, 0, 0.3);
 }
+
+/* profile page style */
+.number-info {
+  color: rgb(172, 172, 172);
+  font-weight: 100;
+}
+
+.number-info span {
+  font-size: 50px;
+  color: black;
+}
+
+.user-main-info {
+  font-weight: 500;
+  font-size: 20px;
+}
+/* profile page style */
