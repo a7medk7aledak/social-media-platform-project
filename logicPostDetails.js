@@ -1,23 +1,22 @@
 // const { headers } = require("next/headers");
-let currentPage = 1;
-let lastPage = 1;
+// let currentPage = 1;
+// let lastPage = 1;
 
-// infinite scroll
-// belal is here
-window.addEventListener("scroll", function () {
-  const endOfPage =
-    window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
-  if (endOfPage && currentPage < lastPage) {
-    currentPage = currentPage + 1;
-    getPosts(false, currentPage);
-  }
-});
+// // infinite scroll
+// // belal is here
+// window.addEventListener("scroll", function () {
+//   const endOfPage =
+//     window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+//   if (endOfPage && currentPage < lastPage) {
+//     currentPage = currentPage + 1;
+//     getPosts(false, currentPage);
+//   }
+// });
 // end infinite scroll
 
 setupUI();
-getPosts();
+// getPosts();
 //get posts
-
 
 function getPosts(reload = true, page = 1) {
   // belal is here
@@ -37,15 +36,17 @@ function getPosts(reload = true, page = 1) {
 
         let content = `<div class="card shadow ">
                         <div class="card-header">
-                            <img class="rounded-circle border border-2" src="${post.author.profile_image
-          }" alt=""
+                            <img class="rounded-circle border border-2" src="${
+                              post.author.profile_image
+                            }" alt=""
                                 style="width: 40px; height: 40px;">
                             <b>${post.author.name}</b>
                         </div>
-                        <div class="card-body" >
+                        <div class="card-body">
                             <img class="w-100" src="${post.image}" alt="">
-                            <h6 class="mt-2" style="color: rgb(163, 159, 159);">${post.created_at
-          }</h6>
+                            <h6 class="mt-2" style="color: rgb(163, 159, 159);">${
+                              post.created_at
+                            }</h6>
                             <h5>${post.title === null ? "" : post.title}</h5> 
                             <p>${post.body}</p>
                             <hr>
@@ -79,7 +80,6 @@ function getPosts(reload = true, page = 1) {
       console.log(error);
     });
 }
-  
 
 // post take url and body
 
@@ -195,8 +195,7 @@ function setupUI() {
   }
 }
 // get current user
-    document.getElementById("nav-image").src = user.profile_image;
-  
+document.getElementById("nav-image").src = user.profile_image;
 
 // get current user
 function getCrrentUser() {
@@ -247,9 +246,4 @@ function createNewPostClicked() {
       const message = error.response.data.message;
       showAlert(message, "danger");
     });
-}
-
-//post click by ahmed_ak
-function postClick() {
-  console.log()
 }
