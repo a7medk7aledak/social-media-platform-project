@@ -360,6 +360,10 @@
         }
     }).then((response)=>{
     getPost(id)
+    showAlert("New comment Has Been Created successfully", "success");
+    }).catch((error)=>{
+        const errorMessage = error.response.data.message;
+        showAlert("the comment is empty!!!","danger")
     })
 }
 </script>
