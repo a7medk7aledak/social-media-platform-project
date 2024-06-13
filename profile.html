@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>API project</title>
+    <title>Profile</title>
     <!-- Bootstrap -->
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css" />
@@ -260,7 +260,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create A New Post</h1>
+                    <h1 class="modal-title fs-5" id="post-modal-title">Create A New Post</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -268,6 +268,8 @@
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Title</label>
                         <input type="text" class="form-control" id="post-title-input">
+                        <input type="hidden" id="post-id-input" value="">
+
                     </div>
                     <div class="mb-3">
                         <textarea name="" id="post-body-input"
@@ -276,17 +278,43 @@
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Image</label>
                         <input type="file" class="form-control" id="post-image-input">
+
                     </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="createNewPostClicked()">Create</button>
+                    <button id="post-modal-submit-btn" type="button" class="btn btn-primary"
+                        onclick="createNewPostClicked()">Create</button>
                 </div>
             </div>
         </div>
     </div>
     <!-- end creatwe -->
+    <!--   start delete modal -->
+    <div class="modal fade" id="delete-post-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="post-modal-title">Are you sure you want to delete the post?
+                        <span id="delete-post-title"></span>
+                    </h1>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    <input type="hidden" id="delete-post-id-input" value="">
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="post-modal-submit-btn" type="button" class="btn btn-danger"
+                        onclick="confirmPostDelete()">Yes, Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--// end delete modal //-->
 
     <script src="./main.js"></script>
     <script src="./profileScript.js"></script>
