@@ -279,7 +279,6 @@
 <script>
     const urlParams = new URLSearchParams(window.location.search) //to get params id
     const id = urlParams.get("postId");
-    console.log(window.location.search)
     setupUI();
     getPost(id)
     function getPost(id) {
@@ -354,13 +353,13 @@
             "body": commentBody
         }
         let token = localStorage.getItem("token")
-        let url = `${baseUrl}/posts/${id}/comments`
+        let url = `https://tarmeezacademy.com/api/v1/posts/${id}/comments`
         axios.post(url, params, {
         headers: {
             "authorization": `Bearer ${token}`
         }
     }).then((response)=>{
-        getPost()
+    getPost(id)
     })
 }
 </script>
