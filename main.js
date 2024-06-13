@@ -1,8 +1,26 @@
+<<<<<<< HEAD
 // const { headers } = require("next/headers");
+=======
+let currentPage = 1;
+let lastPage = 1;
+
+// infinite scroll
+// belal is here
+window.addEventListener("scroll", function () {
+  const endOfPage =
+    window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+  if (endOfPage && currentPage < lastPage) {
+    currentPage = currentPage + 1;
+    getPosts(false, currentPage);
+  }
+});
+// end infinite scroll
+>>>>>>> 04b5ad020e89935a594ebd541344da95e882eff3
 
 setupUI();
 getPosts();
 //get posts
+<<<<<<< HEAD
 function getPosts() {
   axios
     .get("https://tarmeezacademy.com/api/v1/posts") // get take url
@@ -13,6 +31,24 @@ function getPosts() {
       for (const post of posts) {
         console.log(post);
 
+=======
+function getPosts(reload = true, page = 1) {
+  // belal is here
+
+  axios
+    .get(`https://tarmeezacademy.com/api/v1/posts?limit=2&page=${page}`) // get take url
+    .then(function (response) {
+      // handle success
+      let posts = response.data.data;
+      lastPage = response.data.meta.last_page; // belal is here
+      if (reload) {
+        // belal is here
+        document.getElementById("posts").innerHTML = ""; // to make posts empty
+      }
+      for (const post of posts) {
+        console.log(post);
+
+>>>>>>> 04b5ad020e89935a594ebd541344da95e882eff3
         let content = `<div class="card shadow ">
                         <div class="card-header">
                             <img class="rounded-circle border border-2" src="${post.author.profile_image
@@ -57,7 +93,10 @@ function getPosts() {
       console.log(error);
     });
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 04b5ad020e89935a594ebd541344da95e882eff3
 // post take url and body
 
 // login
@@ -81,9 +120,8 @@ function loginBtnClicked() {
       setupUI();
       showAlert("logged in successfully", "success");
     })
-    .catch((error) => {
-      const message = error.response.data.message;
-      showAlert(message, "danger");
+    .catch(() => {
+      showAlert("username or password is incorrect", "danger");
     });
 }
 
@@ -92,14 +130,25 @@ function registerBtnClicked() {
   const name = document.getElementById("register-name-input").value;
   const username = document.getElementById("register-username-input").value;
   const password = document.getElementById("register-Password-input").value;
-  const params = {
-    username: username,
-    password: password,
-    name: name,
+  const image = document.getElementById("register-image-input").files[0];
+
+  let formData = new FormData();
+
+  formData.append("name", name);
+  formData.append("username", username);
+  formData.append("password", password);
+  formData.append("image", image);
+
+  const headers = {
+    "content-type": "multipart/form-data",
   };
+
   axios
-    .post(`https://tarmeezacademy.com/api/v1/register`, params)
+    .post(`https://tarmeezacademy.com/api/v1/register`, formData, {
+      headers: headers,
+    })
     .then((response) => {
+      console.log(response.data);
       // save token in local storage
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -159,9 +208,16 @@ function setupUI() {
     logoutDiv.style.setProperty("display", "flex", "important");
     const user = getCrrentUser();
     document.getElementById("nav-username").innerHTML = user.username;
+<<<<<<< HEAD
   }
 }
 // get current user
+=======
+    document.getElementById("nav-image").src = user.profile_image;
+  }
+}
+// get cuurent user
+>>>>>>> 04b5ad020e89935a594ebd541344da95e882eff3
 function getCrrentUser() {
   let user = null;
   let storageUser = localStorage.getItem("user");

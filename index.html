@@ -55,10 +55,21 @@
                 </div>
                 <div class="modal-body">
                     <form>
+
+
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label">Profile Image:</label>
+                            <input type="file" class="form-control" id="register-image-input">
+                        </div>
+
+
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Name:</label>
                             <input type="text" class="form-control" id="register-name-input">
                         </div>
+
+
+
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label">Username:</label>
                             <input type="text" class="form-control" id="register-username-input">
@@ -89,6 +100,7 @@
                 </div>
                 <div class="modal-body">
 
+<<<<<<< HEAD
                         <div class="mb-3">
                             <label for="recipient-name" class="col-form-label">Title</label>
                             <input type="text" class="form-control" id="post-title-input">
@@ -100,6 +112,20 @@
                             <label for="recipient-name" class="col-form-label">Image</label>
                             <input type="file" class="form-control" id="post-image-input">
                         </div>
+=======
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Title</label>
+                        <input type="text" class="form-control" id="post-title-input">
+                    </div>
+                    <div class="mb-3">
+                        <textarea name="" id="post-body-input"
+                            style="width: 100%;height: 90px;border-color: gray;border-radius: 10px;resize: none;"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label">Image</label>
+                        <input type="file" class="form-control" id="post-image-input">
+                    </div>
+>>>>>>> 04b5ad020e89935a594ebd541344da95e882eff3
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -160,8 +186,8 @@
                             </div>
                             <!--  login And register user-->
 
-                            <div id="logout-div" class="d-flex justify-content-end w-100">
-                                <img class="rounded-circle " style="width: 40px; height: 40;"
+                            <div id="logout-div" class="d-flex justify-content-end w-100 align-items-center">
+                                <img id="nav-image" class="rounded-circle  " style="width: 40px; height: 40;"
                                     src="./profile-pics/profilepic.webp" alt="">
                                 <b id="nav-username">belal ahmed</b>
                                 <button onclick="logout()" id="logout-btn" data-bs-toggle="modal" type="button"
