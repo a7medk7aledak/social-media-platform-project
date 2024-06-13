@@ -139,6 +139,30 @@
         </div>
     </div>
     <!-- end creatwe -->
+    <!--   start delete modal -->
+    <div class="modal fade" id="delete-post-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="post-modal-title">Are you sure you want to delete the post?
+                        <span id="delete-post-title"></span>
+                    </h1>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    <input type="hidden" id="delete-post-id-input" value="">
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button id="post-modal-submit-btn" type="button" class="btn btn-danger"
+                        onclick="confirmPostDelete()">Yes, Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--   end delete modal -->
 
     <!-- start Add post Button -->
     <div class="bg-primary" id="add-btn" onclick="addBtnClicked()">
@@ -181,13 +205,11 @@
 
                             <div id="logedin-div" class="d-flex justify-content-end w-100">
                                 <button id="login-btn" data-bs-toggle="modal" data-bs-target="#login-modal"
-                                    style="transition: background-color 0.3s;" type="button"
-                                    class="mx-2 btn btn-outline-success">
+                                    type="button" class="mx-2 btn btn-outline-success">
                                     Login
                                 </button>
                                 <button id="register-btn" data-bs-toggle="modal" data-bs-target="#register-modal"
-                                    style="transition: background-color 0.3s;" type="button"
-                                    class="btn btn-outline-success">
+                                    type="button" class="btn btn-outline-success">
                                     Register
                                 </button>
                             </div>

@@ -349,6 +349,8 @@ function addBtnClicked() {
   postModal.toggle();
 }
 
+// delete
+
 function deletePostBtnClicked(postObject) {
   let post = JSON.parse(decodeURIComponent(postObject));
   console.log(post);
@@ -360,7 +362,7 @@ function deletePostBtnClicked(postObject) {
   );
   postModal.toggle();
 }
-
+// confirm delete
 function confirmPostDelete() {
   const token = localStorage.getItem("token");
   const postId = document.getElementById("delete-post-id-input").value;
@@ -369,25 +371,24 @@ function confirmPostDelete() {
     "Content-Type": "multipart/form-data",
     authorization: `Bearer ${token}`,
   };
+
+  axios
+    .delete(url, {
+      headers: headers,
+    })
+    .then((response) => {
+      const modal = document.getElementById("delete-post-modal");
+      const modalInstance = bootstrap.Modal.getInstance(modal);
+      modalInstance.hide();
+      showAlert("The Post Has Been Deleted Successfully", "success");
+      getPosts();
+    })
+    .catch((error) => {
+      const message = error.response.data.message;
+      showAlert(message, "danger");
+    });
 }
 
-// toggleDarkMode
-// function toggleDarkMode() {
-//   var body = document.body;
-//   var button = document.getElementById("darkModeToggle");
-//   var img = button.getElementsByTagName("img")[0];
-//   body.classList.toggle("dark-mode");
-
-//   if (body.classList.contains("dark-mode")) {
-//     img.src = "image/night-mode.png";
-//     img.alt = "Dark Mode";
-//   } else {
-//     img.src = "image/light.png";
-//     img.alt = "Light Mode";
-//   }
-// }
-
-// Function to toggle dark mode and store preference in localStorage
 function toggleDarkMode() {
   var body = document.body;
   var icon = document.getElementById("toggleIcon");
