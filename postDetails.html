@@ -239,7 +239,8 @@
     <script src="logicPostDetails.js"></script>
     <script>
         const urlParams = new URLSearchParams(window.location.search) //to get params id
-        const id = urlParams.get("postId")
+        const id = urlParams.get("postId");
+        console.log(id)
         setupUI();
         getPost()
         function getPost(id) {
@@ -248,7 +249,7 @@
             .then(function (response) {
             // handle success
             let post = response.data.data;
-            console.log(response.data)
+            console.log(response)
             })
             .catch(function (error) {
             console.log(error);

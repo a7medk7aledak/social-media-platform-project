@@ -253,5 +253,5 @@ function createNewPostClicked() {
 
 //post click by ahmed_ak
 function postClick(postId) {
-    window.location = `postDetails.html?postIs=${postId}`
+    window.location = `postDetails.html?postId=${postId}`
 }
