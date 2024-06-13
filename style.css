@@ -6,6 +6,7 @@ body {
 .plase {
   background-color: #9461fb;
   transition: background-color 0.3s;
+  color: #fff;
 }
 
 .dark-mode {

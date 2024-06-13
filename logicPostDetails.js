@@ -257,19 +257,23 @@ function toggleLoader(show = true) {
 
 
 // Function to toggle dark mode and store preference in localStorage
+const spanText = document.getElementById("name-posts-h1");
 function toggleDarkMode() {
     var body = document.body;
     var icon = document.getElementById("toggleIcon");
+
     body.classList.toggle("dark-mode");
 
     if (body.classList.contains("dark-mode")) {
         icon.src = "image/dark.png"; 
         icon.alt = "Dark Mode";
         localStorage.setItem('mode', 'dark');
+        spanText.style.color =" rgb(227 227 227)";
     } else {
         icon.src = "image/light.png";
         icon.alt = "Light Mode";
         localStorage.setItem('mode', 'light');
+        spanText.style.color = "#333";
     }
 }
 
@@ -283,9 +287,11 @@ function loadStoredMode() {
         body.classList.add("dark-mode");
         icon.src = "image/dark.png"; 
         icon.alt = "Dark Mode";
+                spanText.style.color = " rgb(227 227 227)";
     } else {
         icon.src = "image/light.png";  
         icon.alt = "Light Mode";
+                spanText.style.color = "#333";
     }
 }
 
