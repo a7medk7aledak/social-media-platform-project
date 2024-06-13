@@ -1,6 +1,4 @@
-<<<<<<< HEAD
 // const { headers } = require("next/headers");
-=======
 let currentPage = 1;
 let lastPage = 1;
 
@@ -15,12 +13,10 @@ window.addEventListener("scroll", function () {
   }
 });
 // end infinite scroll
->>>>>>> 04b5ad020e89935a594ebd541344da95e882eff3
 
 setupUI();
 getPosts();
 //get posts
-<<<<<<< HEAD
 function getPosts() {
   axios
     .get("https://tarmeezacademy.com/api/v1/posts") // get take url
@@ -31,7 +27,6 @@ function getPosts() {
       for (const post of posts) {
         console.log(post);
 
-=======
 function getPosts(reload = true, page = 1) {
   // belal is here
 
@@ -48,7 +43,6 @@ function getPosts(reload = true, page = 1) {
       for (const post of posts) {
         console.log(post);
 
->>>>>>> 04b5ad020e89935a594ebd541344da95e882eff3
         let content = `<div class="card shadow ">
                         <div class="card-header">
                             <img class="rounded-circle border border-2" src="${post.author.profile_image
@@ -93,10 +87,7 @@ function getPosts(reload = true, page = 1) {
       console.log(error);
     });
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> 04b5ad020e89935a594ebd541344da95e882eff3
 // post take url and body
 
 // login
@@ -208,16 +199,13 @@ function setupUI() {
     logoutDiv.style.setProperty("display", "flex", "important");
     const user = getCrrentUser();
     document.getElementById("nav-username").innerHTML = user.username;
-<<<<<<< HEAD
   }
 }
 // get current user
-=======
     document.getElementById("nav-image").src = user.profile_image;
   }
 }
 // get cuurent user
->>>>>>> 04b5ad020e89935a594ebd541344da95e882eff3
 function getCrrentUser() {
   let user = null;
   let storageUser = localStorage.getItem("user");
