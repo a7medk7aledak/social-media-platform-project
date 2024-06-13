@@ -193,10 +193,10 @@ function setupUI() {
     const user = getCrrentUser();
     document.getElementById("nav-username").innerHTML = user.username;
   }
-
+}
 // get current user
     document.getElementById("nav-image").src = user.profile_image;
-  }
+  
 
 // get current user
 function getCrrentUser() {
