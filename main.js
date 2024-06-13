@@ -53,7 +53,7 @@ function getPosts(reload = true, page = 1) {
                             <b>${post.author.name}</b>
                             <span/>
                         </div>
-                        <div class="card-body" onclick ="postClick()" style="cursor: pointer">
+                        <div class="card-body" onclick ="postClick(${post.id})" style="cursor: pointer">
                             <img class="w-100" src="${post.image}" alt="">
                             <h6 class="mt-2" style="color: rgb(163, 159, 159);">${
                               post.created_at

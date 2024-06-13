@@ -279,6 +279,7 @@
 <script>
     const urlParams = new URLSearchParams(window.location.search) //to get params id
     const id = urlParams.get("postId");
+    console.log(window.location.search)
     setupUI();
     getPost(id)
     function getPost(id) {
