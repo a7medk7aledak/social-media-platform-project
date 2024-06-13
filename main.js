@@ -1,4 +1,6 @@
 // const { headers } = require("next/headers");
+const baseUrl = "https://tarmeezacademy.com/api/v1";
+
 let currentPage = 1;
 let lastPage = 1;
 
@@ -30,7 +32,7 @@ function profileCliked() {
 
 function getPosts(reload = true, page = 1) {
   // belal is here
-toggleLoader(true);
+  toggleLoader(true);
   axios
     .get(`https://tarmeezacademy.com/api/v1/posts?limit=2&page=${page}`) // get take url
     .then(function (response) {
@@ -43,17 +45,41 @@ toggleLoader(true);
         document.getElementById("posts").innerHTML = ""; // to make posts empty
       }
       for (const post of posts) {
+        let user = getCrrentUser();
+        let isMyPost = user != null && post.author.id == user.id;
+        let editBtnContent = ``;
+
+        if (isMyPost) {
+          editBtnContent = `
+                        <button class='btn btn-danger' style='margin-left: 5px; float: right' onclick="deletePostBtnClicked('${encodeURIComponent(
+                          JSON.stringify(post)
+                        )}')">delete</button>
+
+                        <button class='btn btn-secondary' style='float: right' onclick="editPostBtnClicked('${encodeURIComponent(
+                          JSON.stringify(post)
+                        )}')">edit</button>
+                    `;
+        }
 
         let content = `<div class="card shadow ">
                         <div class="card-header">
+                        
+                            <span onclick="userClicked(${
+                              post.author.id
+                            })" style="cursor: pointer;"> 
                             <img class="rounded-circle border border-2" src="${
                               post.author.profile_image
                             }" alt=""
                                 style="width: 40px; height: 40px;">
                             <b>${post.author.name}</b>
-                            <span/>
+                            </span>
+                                                                            ${editBtnContent}
+
+
                         </div>
-                        <div class="card-body" onclick ="postClick(${post.id})" style="cursor: pointer">
+                        <div class="card-body" onclick ="postClick(${
+                          post.id
+                        })" style="cursor: pointer">
                             <img class="w-100" src="${post.image}" alt="">
                             <h6 class="mt-2" style="color: rgb(163, 159, 159);">${
                               post.created_at
@@ -101,7 +127,7 @@ function loginBtnClicked() {
     username: username,
     password: password,
   };
-  toggleLoader(1)
+  toggleLoader(1);
   axios
     .post(`https://tarmeezacademy.com/api/v1/login`, params)
     .then((response) => {
@@ -117,7 +143,8 @@ function loginBtnClicked() {
     })
     .catch(() => {
       showAlert("username or password is incorrect", "danger");
-    }).finally(()=>{
+    })
+    .finally(() => {
       toggleLoader(0);
     });
 }
@@ -158,8 +185,9 @@ function registerBtnClicked() {
     .catch((error) => {
       const message = error.response.data.message;
       showAlert(message, "danger");
-    }).finally(()=>{
-        toggleLoader(0);
+    })
+    .finally(() => {
+      toggleLoader(0);
     });
 }
 
@@ -206,10 +234,10 @@ function setupUI() {
     logoutDiv.style.setProperty("display", "flex", "important");
     const user = getCrrentUser();
     document.getElementById("nav-username").innerHTML = user.username;
+    document.getElementById("nav-image").src = user.profile_image;
   }
 }
 // get current user
-document.getElementById("nav-image").src = user.profile_image;
 
 // get current user
 function getCrrentUser() {
@@ -231,29 +259,41 @@ function logout() {
 
 // create new post
 function createNewPostClicked() {
+  let postId = document.getElementById("post-id-input").value;
+  let isCreate = postId == null || postId == "";
+
   const title = document.getElementById("post-title-input").value;
   const body = document.getElementById("post-body-input").value;
-  const image = document.getElementById("post-image-input").files[0]; //get first image using file(s)
+  const image = document.getElementById("post-image-input").files[0];
   const token = localStorage.getItem("token");
-  //to send form data not json
+
   let formData = new FormData();
   formData.append("body", body);
   formData.append("title", title);
   formData.append("image", image);
 
+  let url = ``;
   const headers = {
-    "Content-Type": "multipart/from-data",
+    "Content-Type": "multipart/form-data",
     authorization: `Bearer ${token}`,
   };
-  toggleLoader(1);
+
+  if (isCreate) {
+    url = `${baseUrl}/posts`;
+  } else {
+    formData.append("_method", "put");
+    url = `${baseUrl}/posts/${postId}`;
+  }
+
+  toggleLoader(true);
   axios
-    .post(`https://tarmeezacademy.com/api/v1/posts`, formData, {
+    .post(url, formData, {
       headers: headers,
     })
     .then((response) => {
       const modal = document.getElementById("create-post-modal");
-      const modalinstance = bootstrap.Modal.getInstance(modal);
-      modalinstance.hide();
+      const modalInstance = bootstrap.Modal.getInstance(modal);
+      modalInstance.hide();
       showAlert("New Post Has Been Created", "success");
       getPosts();
     })
@@ -262,7 +302,7 @@ function createNewPostClicked() {
       showAlert(message, "danger");
     })
     .finally(() => {
-      toggleLoader(0);
+      toggleLoader(false);
     });
 }
 
@@ -271,14 +311,64 @@ function postClick(postId) {
   window.location = `postDetails.html?postId=${postId}`;
 }
 
-
-//toggleLoader 
+//toggleLoader
 function toggleLoader(show = true) {
   if (show) {
     document.getElementById("loader").style.visibility = "visible";
-  }else{
+  } else {
     document.getElementById("loader").style.visibility = "hidden";
+  }
 }
+
+function editPostBtnClicked(postObject) {
+  let postModal = new bootstrap.Modal(
+    document.getElementById("create-post-modal"),
+    {}
+  );
+  postModal.toggle();
+  let post = JSON.parse(decodeURIComponent(postObject));
+  console.log(post);
+  document.getElementById("post-id-input").value = post.id;
+
+  document.getElementById("post-modal-title").innerHTML = "Edit Post";
+  document.getElementById("post-title-input").value = post.title;
+  document.getElementById("post-body-input").value = post.body;
+  document.getElementById("post-modal-submit-btn").innerHTML = "Update";
+}
+
+function addBtnClicked() {
+  document.getElementById("post-modal-submit-btn").innerHTML = "Create";
+  document.getElementById("post-id-input").value = "";
+  document.getElementById("post-modal-title").innerHTML = "Create A New Post";
+  document.getElementById("post-title-input").value = "";
+  document.getElementById("post-body-input").value = "";
+  let postModal = new bootstrap.Modal(
+    document.getElementById("create-post-modal"),
+    {}
+  );
+  postModal.toggle();
+}
+
+function deletePostBtnClicked(postObject) {
+  let post = JSON.parse(decodeURIComponent(postObject));
+  console.log(post);
+
+  document.getElementById("delete-post-id-input").value = post.id;
+  let postModal = new bootstrap.Modal(
+    document.getElementById("delete-post-modal"),
+    {}
+  );
+  postModal.toggle();
+}
+
+function confirmPostDelete() {
+  const token = localStorage.getItem("token");
+  const postId = document.getElementById("delete-post-id-input").value;
+  const url = `${baseUrl}/posts/${postId}`;
+  const headers = {
+    "Content-Type": "multipart/form-data",
+    authorization: `Bearer ${token}`,
+  };
 }
 
 // toggleDarkMode
@@ -289,7 +379,7 @@ function toggleLoader(show = true) {
 //   body.classList.toggle("dark-mode");
 
 //   if (body.classList.contains("dark-mode")) {
-//     img.src = "image/night-mode.png"; 
+//     img.src = "image/night-mode.png";
 //     img.alt = "Dark Mode";
 //   } else {
 //     img.src = "image/light.png";
@@ -297,40 +387,37 @@ function toggleLoader(show = true) {
 //   }
 // }
 
-
-
-
 // Function to toggle dark mode and store preference in localStorage
 function toggleDarkMode() {
-    var body = document.body;
-    var icon = document.getElementById("toggleIcon");
-    body.classList.toggle("dark-mode");
+  var body = document.body;
+  var icon = document.getElementById("toggleIcon");
+  body.classList.toggle("dark-mode");
 
-    if (body.classList.contains("dark-mode")) {
-        icon.src = "image/dark.png"; 
-        icon.alt = "Dark Mode";
-        localStorage.setItem('mode', 'dark');
-    } else {
-        icon.src = "image/light.png";
-        icon.alt = "Light Mode";
-        localStorage.setItem('mode', 'light');
-    }
+  if (body.classList.contains("dark-mode")) {
+    icon.src = "image/dark.png";
+    icon.alt = "Dark Mode";
+    localStorage.setItem("mode", "dark");
+  } else {
+    icon.src = "image/light.png";
+    icon.alt = "Light Mode";
+    localStorage.setItem("mode", "light");
+  }
 }
 
 // Function to load the stored mode from localStorage
 function loadStoredMode() {
-    var storedMode = localStorage.getItem('mode');
-    var body = document.body;
-    var icon = document.getElementById("toggleIcon");
+  var storedMode = localStorage.getItem("mode");
+  var body = document.body;
+  var icon = document.getElementById("toggleIcon");
 
-    if (storedMode === 'dark') {
-        body.classList.add("dark-mode");
-        icon.src = "image/dark.png"; 
-        icon.alt = "Dark Mode";
-    } else {
-        icon.src = "image/light.png";  
-        icon.alt = "Light Mode";
-    }
+  if (storedMode === "dark") {
+    body.classList.add("dark-mode");
+    icon.src = "image/dark.png";
+    icon.alt = "Dark Mode";
+  } else {
+    icon.src = "image/light.png";
+    icon.alt = "Light Mode";
+  }
 }
 
 // Load the stored mode when the page loads

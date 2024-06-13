@@ -188,7 +188,7 @@ body {
   position: fixed;
   z-index: 99999;
   width: 90px;
-  height: 90PX;
+  height: 90px;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);

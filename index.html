@@ -15,11 +15,20 @@
 </head>
 
 <body>
-<!-- start loader -->
-    <div id="loader" class="loader-parent" >
-        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    <!-- start loader -->
+    <div id="loader" class="loader-parent">
+        <div class="lds-roller">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-<!-- end loader -->
+    <!-- end loader -->
     <!-- start login modal -->
     <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -99,7 +108,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Create A New Post</h1>
+                    <h1 class="modal-title fs-5" id="post-modal-title">Create A New Post</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -107,6 +116,8 @@
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Title</label>
                         <input type="text" class="form-control" id="post-title-input">
+                        <input type="hidden" id="post-id-input" value="">
+
                     </div>
                     <div class="mb-3">
                         <textarea name="" id="post-body-input"
@@ -115,12 +126,14 @@
                     <div class="mb-3">
                         <label for="recipient-name" class="col-form-label">Image</label>
                         <input type="file" class="form-control" id="post-image-input">
+
                     </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="createNewPostClicked()">Create</button>
+                    <button id="post-modal-submit-btn" type="button" class="btn btn-primary"
+                        onclick="createNewPostClicked()">Create</button>
                 </div>
             </div>
         </div>
@@ -128,7 +141,9 @@
     <!-- end creatwe -->
 
     <!-- start Add post Button -->
-    <div class="plase" id="add-btn" data-bs-toggle="modal" data-bs-target="#create-post-modal">+</div>
+    <div class="bg-primary" id="add-btn" onclick="addBtnClicked()">
+        +
+    </div>
     <!-- start Add post Button -->
 
 
@@ -165,11 +180,14 @@
                             <!--  login And register user-->
 
                             <div id="logedin-div" class="d-flex justify-content-end w-100">
-                                <button id="login-btn" data-bs-toggle="modal" data-bs-target="#login-modal" style="transition: background-color 0.3s;"
-                                    type="button" class="mx-2 btn btn-outline-success">
+                                <button id="login-btn" data-bs-toggle="modal" data-bs-target="#login-modal"
+                                    style="transition: background-color 0.3s;" type="button"
+                                    class="mx-2 btn btn-outline-success">
                                     Login
                                 </button>
-                                <button id="register-btn" data-bs-toggle="modal" data-bs-target="#register-modal"  style="transition: background-color 0.3s;"type="button" class="btn btn-outline-success">
+                                <button id="register-btn" data-bs-toggle="modal" data-bs-target="#register-modal"
+                                    style="transition: background-color 0.3s;" type="button"
+                                    class="btn btn-outline-success">
                                     Register
                                 </button>
                             </div>
