@@ -15,7 +15,11 @@
 </head>
 
 <body>
-
+<!-- start loader -->
+    <div id="loader" class="loader-parent" >
+        <div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+    </div>
+<!-- end loader -->
     <!-- start login modal -->
     <div class="modal fade" id="login-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -192,13 +196,13 @@
         <!-- user's post -->
         <div class="d-flex justify-content-center row mt-5">
             <div class="col-9">
-                <h1 style="color: #ffff;">
+                <h1 >
                     <span id="username-span"></span>
                     's post
                 </h1>
             </div>
             <!-- start post -->
-            <div class="d-flex justify-content-center row mt-5">
+            <div class="d-flex justify-content-center row mt-2">
                 <div class="col-9" id="post">
                     <div class="card shadow ">
                         <div class="card-header">

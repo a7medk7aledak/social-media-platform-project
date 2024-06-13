@@ -6,7 +6,7 @@ let lastPage = 1;
 // belal is here
 window.addEventListener("scroll", function () {
   const endOfPage =
-    window.innerHeight + window.pageYOffset >= document.body.offsetHeight;
+    window.innerHeight + window.pageYOffset >= document.body.scrollHeight;
   if (endOfPage && currentPage < lastPage) {
     currentPage = currentPage + 1;
     getPosts(false, currentPage);
@@ -30,10 +30,11 @@ function profileCliked() {
 
 function getPosts(reload = true, page = 1) {
   // belal is here
-
+toggleLoader(true);
   axios
     .get(`https://tarmeezacademy.com/api/v1/posts?limit=2&page=${page}`) // get take url
     .then(function (response) {
+      toggleLoader(false);
       // handle success
       let posts = response.data.data;
       lastPage = response.data.meta.last_page; // belal is here
@@ -42,7 +43,6 @@ function getPosts(reload = true, page = 1) {
         document.getElementById("posts").innerHTML = ""; // to make posts empty
       }
       for (const post of posts) {
-        console.log(post);
 
         let content = `<div class="card shadow ">
                         <div class="card-header">
@@ -87,7 +87,6 @@ function getPosts(reload = true, page = 1) {
       }
     })
     .catch(function (error) {
-      axios;
       console.log(error);
     });
 }
@@ -102,6 +101,7 @@ function loginBtnClicked() {
     username: username,
     password: password,
   };
+  toggleLoader(1)
   axios
     .post(`https://tarmeezacademy.com/api/v1/login`, params)
     .then((response) => {
@@ -117,6 +117,8 @@ function loginBtnClicked() {
     })
     .catch(() => {
       showAlert("username or password is incorrect", "danger");
+    }).finally(()=>{
+      toggleLoader(0);
     });
 }
 
@@ -137,13 +139,12 @@ function registerBtnClicked() {
   const headers = {
     "content-type": "multipart/form-data",
   };
-
+  toggleLoader(1);
   axios
     .post(`https://tarmeezacademy.com/api/v1/register`, formData, {
       headers: headers,
     })
     .then((response) => {
-      console.log(response.data);
       // save token in local storage
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
@@ -157,6 +158,8 @@ function registerBtnClicked() {
     .catch((error) => {
       const message = error.response.data.message;
       showAlert(message, "danger");
+    }).finally(()=>{
+        toggleLoader(0);
     });
 }
 
@@ -242,6 +245,7 @@ function createNewPostClicked() {
     "Content-Type": "multipart/from-data",
     authorization: `Bearer ${token}`,
   };
+  toggleLoader(1);
   axios
     .post(`https://tarmeezacademy.com/api/v1/posts`, formData, {
       headers: headers,
@@ -256,10 +260,23 @@ function createNewPostClicked() {
     .catch((error) => {
       const message = error.response.data.message;
       showAlert(message, "danger");
-    });
+    })
+    .finally(() => {
+      toggleLoader(0);
+    });;
 }
 
 //post click by ahmed_ak
 function postClick(postId) {
   window.location = `postDetails.html?postId=${postId}`;
+}
+
+
+//toggleLoader 
+function toggleLoader(show = true) {
+  if (show) {
+    document.getElementById("loader").style.visibility = "visible";
+  }else{
+    document.getElementById("loader").style.visibility = "hidden";
+}
 }
