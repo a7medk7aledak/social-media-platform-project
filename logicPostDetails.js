@@ -246,5 +246,48 @@ function createNewPostClicked() {
         });
 }
 
+//toggleLoader 
+function toggleLoader(show = true) {
+  if (show) {
+    document.getElementById("loader").style.visibility = "visible";
+  }else{
+    document.getElementById("loader").style.visibility = "hidden";
+}
+}
 
-// get post for 1 user
+
+// Function to toggle dark mode and store preference in localStorage
+function toggleDarkMode() {
+    var body = document.body;
+    var icon = document.getElementById("toggleIcon");
+    body.classList.toggle("dark-mode");
+
+    if (body.classList.contains("dark-mode")) {
+        icon.src = "image/dark.png"; 
+        icon.alt = "Dark Mode";
+        localStorage.setItem('mode', 'dark');
+    } else {
+        icon.src = "image/light.png";
+        icon.alt = "Light Mode";
+        localStorage.setItem('mode', 'light');
+    }
+}
+
+// Function to load the stored mode from localStorage
+function loadStoredMode() {
+    var storedMode = localStorage.getItem('mode');
+    var body = document.body;
+    var icon = document.getElementById("toggleIcon");
+
+    if (storedMode === 'dark') {
+        body.classList.add("dark-mode");
+        icon.src = "image/dark.png"; 
+        icon.alt = "Dark Mode";
+    } else {
+        icon.src = "image/light.png";  
+        icon.alt = "Light Mode";
+    }
+}
+
+// Load the stored mode when the page loads
+window.onload = loadStoredMode;
