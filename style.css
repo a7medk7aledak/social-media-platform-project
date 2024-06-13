@@ -2,28 +2,30 @@ body {
   background-color: #ffffff;
   transition: background-color 0.5s, color 0.5s;
 }
+
 .plase {
   background-color: #9461fb;
-    transition: background-color 0.3s;
+  transition: background-color 0.3s;
 }
 
- .dark-mode {
-   background-color: #1e1e1e;
- }
+.dark-mode {
+  background-color: #1e1e1e;
+}
 
- .toggle-button {
-   right: 10px;
-   padding: 5px;
-   background-color: transparent;
-   border: none;
-   cursor: pointer;
-    border: rgb(255, 205, 112) 1px solid;
-    border-radius: 50%;
-    margin: 0 10px;
- }
- .toggle-button img {
-   width: 27px;
- }
+.toggle-button {
+  right: 10px;
+  padding: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border: rgb(255, 205, 112) 1px solid;
+  border-radius: 50%;
+  margin: 0 10px;
+}
+
+.toggle-button img {
+  width: 27px;
+}
 
 .plase:hover {
   background-color: #712cf9;
@@ -63,6 +65,7 @@ body {
   font-weight: 500;
   font-size: 20px;
 }
+
 /* profile page style */
 /* loader style */
 .lds-roller,
@@ -177,7 +180,7 @@ body {
 }
 
 .loader-parent {
-  background-color: rgb(128, 128, 128,0.495);
+  background-color: rgb(128, 128, 128, 0.495);
   border-radius: 25px;
   display: flex;
   justify-content: center;
@@ -188,5 +191,5 @@ body {
   height: 90PX;
   left: 50%;
   top: 50%;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
 }
