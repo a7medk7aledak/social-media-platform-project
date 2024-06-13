@@ -46,13 +46,6 @@ function getPosts(reload = true, page = 1) {
 
         let content = `<div class="card shadow ">
                         <div class="card-header">
-<<<<<<< Updated upstream
-
-                            <span onclick="userClicked(${
-                              post.author.id
-                            })" style="cursor: pointer;"> 
-=======
->>>>>>> Stashed changes
                             <img class="rounded-circle border border-2" src="${
                               post.author.profile_image
                             }" alt=""
@@ -60,13 +53,7 @@ function getPosts(reload = true, page = 1) {
                             <b>${post.author.name}</b>
                             <span/>
                         </div>
-<<<<<<< Updated upstream
-                        <div class="card-body" onclick = "postClick(${
-                          post.id
-                        })" style = "cursor: pointer">
-=======
                         <div class="card-body" onclick ="postClick()" style="cursor: pointer">
->>>>>>> Stashed changes
                             <img class="w-100" src="${post.image}" alt="">
                             <h6 class="mt-2" style="color: rgb(163, 159, 159);">${
                               post.created_at
