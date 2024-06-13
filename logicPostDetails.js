@@ -245,3 +245,6 @@ function createNewPostClicked() {
             showAlert(message, "danger");
         });
 }
+
+
+// get post for 1 user
