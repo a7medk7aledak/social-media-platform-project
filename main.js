@@ -17,15 +17,7 @@ window.addEventListener("scroll", function () {
 setupUI();
 getPosts();
 //get posts
-function getPosts() {
-  axios
-    .get("https://tarmeezacademy.com/api/v1/posts") // get take url
-    .then(function (response) {
-      // handle success
-      let posts = response.data.data;
-      document.getElementById("posts").innerHTML = ""; // to make posts empty
-      for (const post of posts) {
-        console.log(post);
+
 
 function getPosts(reload = true, page = 1) {
   // belal is here
@@ -87,6 +79,7 @@ function getPosts(reload = true, page = 1) {
       console.log(error);
     });
 }
+  
 
 // post take url and body
 
@@ -200,12 +193,12 @@ function setupUI() {
     const user = getCrrentUser();
     document.getElementById("nav-username").innerHTML = user.username;
   }
-}
+
 // get current user
     document.getElementById("nav-image").src = user.profile_image;
   }
-}
-// get cuurent user
+
+// get current user
 function getCrrentUser() {
   let user = null;
   let storageUser = localStorage.getItem("user");
