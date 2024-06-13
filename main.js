@@ -16,8 +16,17 @@ window.addEventListener("scroll", function () {
 
 setupUI();
 getPosts();
-//get posts
 
+function userClicked(userId) {
+  window.location = `profile.html?userid=${userId}`;
+}
+function profileCliked() {
+  const user = getCrrentUser();
+  const userId = user.id;
+  window.location = `profile.html?userid=${userId}`;
+}
+
+//get posts
 
 function getPosts(reload = true, page = 1) {
   // belal is here
@@ -37,13 +46,20 @@ function getPosts(reload = true, page = 1) {
 
         let content = `<div class="card shadow ">
                         <div class="card-header">
+
+                            <span onclick="userClicked(${
+                              post.author.id
+                            })" style="cursor: pointer;"> 
                             <img class="rounded-circle border border-2" src="${
                               post.author.profile_image
                             }" alt=""
                                 style="width: 40px; height: 40px;">
                             <b>${post.author.name}</b>
+                            <span/>
                         </div>
-                        <div class="card-body" onclick = "postClick(${post.id})" style = "cursor: pointer">
+                        <div class="card-body" onclick = "postClick(${
+                          post.id
+                        })" style = "cursor: pointer">
                             <img class="w-100" src="${post.image}" alt="">
                             <h6 class="mt-2" style="color: rgb(163, 159, 159);">${
                               post.created_at
@@ -81,7 +97,6 @@ function getPosts(reload = true, page = 1) {
       console.log(error);
     });
 }
-  
 
 // post take url and body
 
@@ -197,8 +212,7 @@ function setupUI() {
   }
 }
 // get current user
-    document.getElementById("nav-image").src = user.profile_image;
-  
+document.getElementById("nav-image").src = user.profile_image;
 
 // get current user
 function getCrrentUser() {
@@ -253,5 +267,5 @@ function createNewPostClicked() {
 
 //post click by ahmed_ak
 function postClick(postId) {
-    window.location = `postDetails.html?postId=${postId}`
+  window.location = `postDetails.html?postId=${postId}`;
 }
